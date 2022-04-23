@@ -8,6 +8,7 @@ public class User {
     private String phone;
     private String address;
     private Boolean isAdmin;
+    private Account account;
 
     public User(String username, String userId, String password, String email, String phone, String address,
             Boolean isAdmin) {
@@ -18,6 +19,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.isAdmin = isAdmin;
+        this.account = new Account();
     }
 
     public User(String username, String password, String email, String phone, String address, Boolean isAdmin) {
@@ -27,6 +29,10 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.isAdmin = isAdmin;
+    }
+
+    public Account getAccount() {
+        return account;
     }
 
     public String getUsername() {
