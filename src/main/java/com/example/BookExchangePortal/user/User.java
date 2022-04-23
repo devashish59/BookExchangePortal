@@ -1,5 +1,7 @@
 package com.example.BookExchangePortal.user;
 
+import com.example.BookExchangePortal.account.Account;
+
 public class User {
     private String username;
     private String userId;

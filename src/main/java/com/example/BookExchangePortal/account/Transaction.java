@@ -1,6 +1,7 @@
-package com.example.BookExchangePortal.user;
+package com.example.BookExchangePortal.account;
 
 import java.time.LocalDateTime;
+import com.example.BookExchangePortal.user.User;
 
 public class Transaction {
     private String transactionId;
@@ -98,6 +99,5 @@ public class Transaction {
     public void setPenalty(int penalty) {
         this.penalty = penalty;
     }
-    
     
 }

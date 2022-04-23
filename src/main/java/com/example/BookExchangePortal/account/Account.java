@@ -1,4 +1,4 @@
-package com.example.BookExchangePortal.user;
+package com.example.BookExchangePortal.account;
 
 import java.util.List;
 
@@ -35,6 +35,5 @@ public class Account {
     public void setTransactionList(List<Transaction> transactionList) {
         this.transactionList = transactionList;
     }
-    
     
 }
