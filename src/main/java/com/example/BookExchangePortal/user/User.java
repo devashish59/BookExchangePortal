@@ -23,6 +23,10 @@ public class User {
     private String email;
     private String phone;
     private String address;
+    
+    public User() {
+    }
+
     private Boolean isAdmin;
 
     @OneToOne(cascade = CascadeType.ALL)
