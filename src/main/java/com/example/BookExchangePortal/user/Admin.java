@@ -6,7 +6,6 @@ public class Admin extends User{
 
     public Admin(String username, String password, String email, String phone, String address, Boolean isAdmin, String adminId) {
         super(username, password, email, phone, address, isAdmin);
-        //TODO Auto-generated constructor stub
         this.adminId = adminId;
     }
 

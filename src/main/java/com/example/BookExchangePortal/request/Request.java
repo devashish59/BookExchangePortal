@@ -2,11 +2,28 @@ package com.example.BookExchangePortal.request;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.example.BookExchangePortal.user.User;
 
+@Entity
+@Table
 public class Request {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int reqId;
     private String bookTitle;
     private LocalDateTime expectedRetDtTime;
+
+    @OneToOne
+    @JoinColumn(name="reqCreator",referencedColumnName = "userId")
     private final User requestCreator;
     
     public Request(final String bookTitle, final LocalDateTime expectedRetDtTime, final User requestCreator) {

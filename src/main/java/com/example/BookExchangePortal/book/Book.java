@@ -1,14 +1,35 @@
 package com.example.BookExchangePortal.book;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.example.BookExchangePortal.user.User;
 
+@Entity
+@Table
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int bookId;
     private String bookTitle;
     private String author;
+
+    @OneToOne
+    @JoinColumn(name="portalPublisher",referencedColumnName = "userId")
     private User portalPublisher;
     private String edition;
+
     private String isbn;
     private Integer year;
+
+    @OneToOne
+    @JoinColumn(name="curHolder", referencedColumnName = "userId")
     private User currentHolder;
     
     public Book(String bookTitle, String author, User portalPublisher, String edition, String isbn, Integer year,

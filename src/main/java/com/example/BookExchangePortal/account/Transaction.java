@@ -8,10 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.example.BookExchangePortal.book.Book;
+
 @Entity
-@Table
+@Table(name="transaction" )
 public class Transaction {
 
     @Id
@@ -23,9 +26,21 @@ public class Transaction {
     private LocalDateTime expRetDateTime;
     private LocalDateTime actualRetDateTime;
 
+    @OneToOne
+    @JoinColumn(name="bid", referencedColumnName = "bookid")
+    private Book book;
+
     @ManyToOne
     @JoinColumn(name="lenderAccno",nullable = false)
     private Account lenderAccount;
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
     @ManyToOne
     @JoinColumn(name="borrowerAccno",nullable = false)
@@ -34,7 +49,7 @@ public class Transaction {
     private int penalty;
     
     public Transaction(String transactionId, String exchangeLoc, LocalDateTime exchaDateTime,
-            LocalDateTime expRetDateTime, LocalDateTime actualRetDateTime, Account lenderAccount, Account borrowerAccount, int penalty) {
+            LocalDateTime expRetDateTime, LocalDateTime actualRetDateTime, Account lenderAccount, Account borrowerAccount, int penalty,Book book) {
         this.transactionId = transactionId;
         this.exchangeLoc = exchangeLoc;
         this.exchaDateTime = exchaDateTime;
@@ -43,6 +58,7 @@ public class Transaction {
         this.lenderAccount = lenderAccount;
         this.borrowerAccount = borrowerAccount;
         this.penalty = penalty;
+        this.book = book;
     }
 
     public Transaction(String exchangeLoc, LocalDateTime exchaDateTime, LocalDateTime expRetDateTime,
