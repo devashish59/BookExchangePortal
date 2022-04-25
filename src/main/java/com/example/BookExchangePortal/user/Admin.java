@@ -9,7 +9,7 @@ public class Admin extends User{
         this.adminId = adminId;
     }
 
-    public Admin(String username, String userId, String password, String email, String phone, String address,
+    public Admin(String username, Integer userId, String password, String email, String phone, String address,
             Boolean isAdmin, String adminId) {
         super(username, userId, password, email, phone, address, isAdmin);
         this.adminId = adminId;

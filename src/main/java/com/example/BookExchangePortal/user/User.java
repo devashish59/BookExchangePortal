@@ -1,5 +1,6 @@
 package com.example.BookExchangePortal.user;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String userId;
+    private Integer userId;
     private String username;
     private String password;
     private String email;
@@ -24,11 +25,11 @@ public class User {
     private String address;
     private Boolean isAdmin;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="accno",referencedColumnName = "accno")
     private Account account;
 
-    public User(String username, String userId, String password, String email, String phone, String address,
+    public User(String username, Integer userId, String password, String email, String phone, String address,
             Boolean isAdmin) {
         this.username = username;
         this.userId = userId;
@@ -47,6 +48,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.isAdmin = isAdmin;
+        this.account = new Account();
     }
 
     public Account getAccount() {
@@ -61,11 +63,11 @@ public class User {
         this.username = username;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

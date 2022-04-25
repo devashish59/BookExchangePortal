@@ -16,7 +16,7 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String accno;
+    private Integer accno;
     private Integer balance;
 
     @OneToMany(mappedBy = "lenderAccount",cascade = CascadeType.ALL)
@@ -25,15 +25,16 @@ public class Account {
     @OneToMany(mappedBy = "borrowerAccount",cascade = CascadeType.ALL)
     private List<Transaction> borrowingTransactionList;
     
-    public Account(String accno, Integer balance) {
+    public Account(Integer accno, Integer balance) {
         this.accno = accno;
         this.balance = balance;
     }
 
     public Account() {
+        balance = 0;
     }
 
-    public String getAccno() {
+    public Integer getAccno() {
         return accno;
     }
 
