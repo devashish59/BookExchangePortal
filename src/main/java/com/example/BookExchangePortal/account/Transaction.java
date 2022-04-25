@@ -1,38 +1,58 @@
 package com.example.BookExchangePortal.account;
 
 import java.time.LocalDateTime;
-import com.example.BookExchangePortal.user.User;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Transaction {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String transactionId;
+
     private String exchangeLoc;
     private LocalDateTime exchaDateTime;
     private LocalDateTime expRetDateTime;
     private LocalDateTime actualRetDateTime;
-    private User lender;
-    private User borrower;
+
+    @ManyToOne
+    @JoinColumn(name="lenderAccno",nullable = false)
+    private Account lenderAccount;
+
+    @ManyToOne
+    @JoinColumn(name="borrowerAccno",nullable = false)
+    private Account borrowerAccount;
+
     private int penalty;
     
     public Transaction(String transactionId, String exchangeLoc, LocalDateTime exchaDateTime,
-            LocalDateTime expRetDateTime, LocalDateTime actualRetDateTime, User lender, User borrower, int penalty) {
+            LocalDateTime expRetDateTime, LocalDateTime actualRetDateTime, Account lenderAccount, Account borrowerAccount, int penalty) {
         this.transactionId = transactionId;
         this.exchangeLoc = exchangeLoc;
         this.exchaDateTime = exchaDateTime;
         this.expRetDateTime = expRetDateTime;
         this.actualRetDateTime = actualRetDateTime;
-        this.lender = lender;
-        this.borrower = borrower;
+        this.lenderAccount = lenderAccount;
+        this.borrowerAccount = borrowerAccount;
         this.penalty = penalty;
     }
 
     public Transaction(String exchangeLoc, LocalDateTime exchaDateTime, LocalDateTime expRetDateTime,
-            LocalDateTime actualRetDateTime, User lender, User borrower, int penalty) {
+            LocalDateTime actualRetDateTime, Account lenderAccount, Account borrowerAccount, int penalty) {
         this.exchangeLoc = exchangeLoc;
         this.exchaDateTime = exchaDateTime;
         this.expRetDateTime = expRetDateTime;
         this.actualRetDateTime = actualRetDateTime;
-        this.lender = lender;
-        this.borrower = borrower;
+        this.lenderAccount = lenderAccount;
+        this.borrowerAccount = borrowerAccount;
         this.penalty = penalty;
     }
 
@@ -76,20 +96,20 @@ public class Transaction {
         this.actualRetDateTime = actualRetDateTime;
     }
 
-    public User getLender() {
-        return lender;
+    public Account getlenderAccount() {
+        return lenderAccount;
     }
 
-    public void setLender(User lender) {
-        this.lender = lender;
+    public void setlenderAccount(Account lenderAccount) {
+        this.lenderAccount = lenderAccount;
     }
 
-    public User getBorrower() {
-        return borrower;
+    public Account getborrowerAccount() {
+        return borrowerAccount;
     }
 
-    public void setBorrower(User borrower) {
-        this.borrower = borrower;
+    public void setborrowerAccount(Account borrowerAccount) {
+        this.borrowerAccount = borrowerAccount;
     }
 
     public int getPenalty() {
