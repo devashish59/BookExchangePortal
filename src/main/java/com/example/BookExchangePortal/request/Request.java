@@ -18,7 +18,7 @@ public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int reqId;
+    private Integer reqId;
     private String bookTitle;
     private LocalDateTime expectedRetDtTime;
 
