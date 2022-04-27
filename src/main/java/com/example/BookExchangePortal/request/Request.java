@@ -24,8 +24,13 @@ public class Request {
 
     @OneToOne
     @JoinColumn(name="reqCreator",referencedColumnName = "userId")
-    private final User requestCreator;
+    private User requestCreator;
     
+
+    public Request(){
+
+    }
+
     public Request(final String bookTitle, final LocalDateTime expectedRetDtTime, final User requestCreator) {
         this.bookTitle = bookTitle;
         this.expectedRetDtTime = expectedRetDtTime;
