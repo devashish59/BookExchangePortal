@@ -19,7 +19,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String transactionId;
+    private Integer transactionId;
 
     private String exchangeLoc;
     private LocalDateTime exchaDateTime;
@@ -31,7 +31,7 @@ public class Transaction {
     private Book book;
 
     @ManyToOne
-    @JoinColumn(name="lenderAccno",nullable = false)
+    @JoinColumn(name="lenderAccno")
     private Account lenderAccount;
 
     public Book getBook() {
@@ -43,13 +43,17 @@ public class Transaction {
     }
 
     @ManyToOne
-    @JoinColumn(name="borrowerAccno",nullable = false)
+    @JoinColumn(name="borrowerAccno")
     private Account borrowerAccount;
 
-    private int penalty;
+    private Integer penalty;
+
+    public Transaction(){
+
+    }
     
-    public Transaction(String transactionId, String exchangeLoc, LocalDateTime exchaDateTime,
-            LocalDateTime expRetDateTime, LocalDateTime actualRetDateTime, Account lenderAccount, Account borrowerAccount, int penalty,Book book) {
+    public Transaction(Integer transactionId, String exchangeLoc, LocalDateTime exchaDateTime,
+            LocalDateTime expRetDateTime, LocalDateTime actualRetDateTime, Account lenderAccount, Account borrowerAccount, int penalty, Book book) {
         this.transactionId = transactionId;
         this.exchangeLoc = exchangeLoc;
         this.exchaDateTime = exchaDateTime;
@@ -72,11 +76,11 @@ public class Transaction {
         this.penalty = penalty;
     }
 
-    public String getTransactionId() {
+    public Integer getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(String transactionId) {
+    public void setTransactionId(Integer transactionId) {
         this.transactionId = transactionId;
     }
 
