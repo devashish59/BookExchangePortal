@@ -18,4 +18,14 @@ public class RequestService {
     public List<Request> getRequests(){
         return requestRepository.findAll();
     }
+
+    public void deleteRequest(Integer reqId){
+		boolean exists = requestRepository.existsById(reqId);
+		if(!exists)
+		{
+			throw new IllegalStateException("User with Id "+reqId+" does not exists.");
+		}
+		requestRepository.deleteById(reqId);
+	}
+
 }

@@ -18,5 +18,14 @@ public class BookService {
     public List<Book> getBooks(){
         return bookRepository.findAll();
     }
+
+    public void deleteBook(Integer bookId){
+		boolean exists = bookRepository.existsById(bookId);
+		if(!exists)
+		{
+			throw new IllegalStateException("Book with Id "+bookId+" does not exists.");
+		}
+		bookRepository.deleteById(bookId);
+	}
     
 }
