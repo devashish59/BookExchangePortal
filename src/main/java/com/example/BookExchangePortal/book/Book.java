@@ -103,6 +103,6 @@ public class Book {
     public void setCurrentHolder(User currentHolder) {
         this.currentHolder = currentHolder;
     }
-
+    
     
 }

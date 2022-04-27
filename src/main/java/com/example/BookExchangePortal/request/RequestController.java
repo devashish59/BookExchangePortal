@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +27,12 @@ public class RequestController {
         return requestService.getRequests();
     }
 
-    @DeleteMapping(path = "{reqId}")
+    @PostMapping
+    public void addNewRequest(@RequestBody Request request){
+        requestService.addNewRequest(request);
+    } 
+
+    @DeleteMapping(path = "/delete/{reqId}")
     public void deleteUser(@PathVariable("reqId") Integer reqId){
         requestService.deleteRequest(reqId);
     }
