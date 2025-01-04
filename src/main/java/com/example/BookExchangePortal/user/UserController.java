@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(path = "api/user")
+@RequestMapping(path = "user")
 public class UserController {
 
     private final UserService userService;
@@ -25,18 +25,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/getAllUsers")
 	public List<User> getUsers(){
 		return userService.getUsers();
 	}
 
-    @PostMapping
-    public void registerNewUser(@RequestBody User user){
+    @PostMapping(path = "/addUser")
+    public void registerNewUser(@RequestBody User user) {
         userService.addNewUser(user);
-    } 
+    }
 
-    @DeleteMapping(path = "/delete/{userId}")
-    public void deleteUser(@PathVariable("userId") Integer userId){
-        userService.deleteUser(userId);
+    @DeleteMapping(path = "/delete/{email}")
+    public void deleteUserByEmail(@PathVariable("email") String email) {
+        userService.deleteUser(email);
     }
 }

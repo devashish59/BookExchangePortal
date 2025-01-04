@@ -1,5 +1,7 @@
 package com.example.BookExchangePortal.user;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,12 +20,13 @@ public class UserService {
 	}
 
 	public List<User> getUsers(){
+		
 		return userRepository.findAll();
 	}
 
     public void addNewUser(User user) {
 		Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
-		if(userOptional.isPresent()){
+		if(userOptional.isPresent()) {
 			throw new IllegalStateException("Email already used.");
 		}
 		User newUser = new User(user.getUsername(),user.getPassword(),
@@ -32,13 +35,12 @@ public class UserService {
 		userRepository.save(newUser);
     }
 
-	public void deleteUser(Integer userId){
-		boolean exists = userRepository.existsById(userId);
-		if(!exists)
-		{
-			throw new IllegalStateException("User with Id "+userId+" does not exists.");
+	public void deleteUser(String email) {
+		Optional<User> userOptional = userRepository.findUserByEmail(email);
+		if(!userOptional.isPresent()) {
+			throw new IllegalStateException("User with Id "+email+" does not exist.");
 		}
-		userRepository.deleteById(userId);
+		userRepository.deleteByEmail(email);
 	}
 
 }
