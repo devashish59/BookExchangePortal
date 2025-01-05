@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,11 @@ public class UserController {
         this.log = LogManager.getLogger();
     }
 
+    /**
+	 * Gets a List of all Users
+	 *
+	 * @return List of all users as List<User>
+	 */
     @GetMapping(path = "/getAllUsers")
 	public @ResponseBody ResponseEntity<List<User>> getUsers(){
 		try {
@@ -44,11 +50,29 @@ public class UserController {
         }
 	}
 
+    /**
+	 * Adds a User object to the database
+	 *
+	 * @param user User object to be created
+	 * @return ResponseEntity with created User
+	 */
     @PostMapping(path = "/addUser")
-    public void registerNewUser(@RequestBody User user) {
-        userService.addNewUser(user);
+    public ResponseEntity<User> registerNewUser(@RequestBody User user) {
+        try {
+            userService.addNewUser(user);
+            return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        }
+        catch(Exception exception) {
+            log.error("Unable to get response due to: " + exception.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+    /**
+	 * Deletes User identified by email of the User
+	 *
+	 * @param email of User object to be deleted
+	 */
     @DeleteMapping(path = "/delete/{email}")
     public void deleteUserByEmail(@PathVariable("email") String email) {
         userService.deleteUser(email);
