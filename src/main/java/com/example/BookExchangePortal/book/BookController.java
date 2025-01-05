@@ -18,22 +18,22 @@ public class BookController {
     private final BookService bookService;
 
     @Autowired
-    public BookController(BookService bookService){
+    public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
     @GetMapping
-    public List<Book> getBooks(){
+    public List<Book> getBooks() {
         return bookService.getBooks();
     }
 
     @PostMapping
-    public void addNewBook(@RequestBody Book book){
+    public void addNewBook(@RequestBody Book book) {
         bookService.addNewBook(book);
     }
 
     @DeleteMapping(path = "/delete/{bookId}")
-    public void deleteBook(@PathVariable("bookId") Integer bookId){
+    public void deleteBook(@PathVariable("bookId") Integer bookId) {
         bookService.deleteBook(bookId);
     }
 
